@@ -1,0 +1,6 @@
+{
+  "name": "Expérience Interactive d'Amour",
+  "description": "Un site web d'amour immersif et romantique.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
