@@ -170,7 +170,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = () => {
         fallbackAudioRef.current = null;
       }
     };
-  }, [hasInteracted]);
+  }, []);
 
   useEffect(() => {
     const onFirstInteraction = () => {

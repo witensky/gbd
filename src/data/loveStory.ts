@@ -1,5 +1,10 @@
 import { LoveStoryConfig } from '../types';
 
+import crusto from '../assets/images/crusto.jpg';
+import romanticMoment1 from '../assets/images/romantic_moment_1_1785561712534.jpg';
+import romanticMoment2 from '../assets/images/romantic_moment_2_1785561724595.jpg';
+import romanticMoment3 from '../assets/images/romantic_moment_3_1785561737159.jpg';
+
 export const DEFAULT_LOVE_STORY: LoveStoryConfig = {
   recipientName: "Beverlie",
   senderName: "Witensky J.",
@@ -10,7 +15,7 @@ export const DEFAULT_LOVE_STORY: LoveStoryConfig = {
     {
       id: "decl-1",
       title: "Premye Fwa",
-      content: "Premyefwa mwen te wè w, mwen te reyalize ke lavi m patap menm jan. ou pote lakay mwen yon  santiman ke m t ap chèche. Ou chanje fason mwen te konn panse e fason mwen te konn aji, mwen etone paske mwen pat atann ak efè sa.",
+      content: "Premye fwa mwen te wè w, mwen te reyalize ke lavi m patap menm jan. ou pote lakay mwen yon  santiman ke m t ap chèche. Ou chanje fason mwen te konn panse e fason mwen te konn aji, mwen etone paske mwen pat atann ak efè sa.",
       subtext: "Yon moman ki grave nan memwa mwen pou tout tan",
       category: "first_sight",
       icon: "✨"
@@ -44,7 +49,7 @@ export const DEFAULT_LOVE_STORY: LoveStoryConfig = {
   photos: [
     {
       id: "photo-1",
-      url: "/src/assets/images/romantic_moment_1_1785561712534.jpg",
+      url: romanticMoment1,
       title: "Moman silans nou yo",
       date: "2026",
       location: "Haiti - Maroc",
@@ -53,7 +58,7 @@ export const DEFAULT_LOVE_STORY: LoveStoryConfig = {
     },
     {
       id: "photo-2",
-      url: "/src/assets/images/romantic_moment_2_1785561724595.jpg",
+      url: romanticMoment2,
       title: "Yon chokola myèl",
       date: "2026",
       location: "Haiti - Maroc",
@@ -62,7 +67,7 @@ export const DEFAULT_LOVE_STORY: LoveStoryConfig = {
     },
     {
       id: "photo-3",
-      url: "/src/assets/images/romantic_moment_3_1785561737159.jpg",
+      url: romanticMoment3,
       title: "Sous le soleil",
       date: "Une journée magique",
       location: "Haiti - Maroc",
@@ -71,7 +76,7 @@ export const DEFAULT_LOVE_STORY: LoveStoryConfig = {
     },
     {
       id: "photo-4",
-      url: "/src/assets/images/crusto.jpg",
+      url: crusto,
       title: "Lettres & Cœurs",
       date: "Tous les jours",
       location: "Dans nos pensées",
