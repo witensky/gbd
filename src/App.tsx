@@ -68,9 +68,6 @@ function LoveStoryApp() {
       {/* Custom Romantic Sparkle Cursor */}
       <CustomCursor />
 
-      {/* Floating Audio Ambiance Player */}
-      <AudioPlayer currentStageId={currentStageId} />
-
       {/* Easter Egg Clickable Surprises */}
       <SurpriseHearts />
 
@@ -186,10 +183,13 @@ function LoveStoryApp() {
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/birthday" element={<Birthday />} />
-      <Route path="/birthday/index.html" element={<Birthday />} />
-      <Route path="*" element={<LoveStoryApp />} />
-    </Routes>
+    <>
+      <AudioPlayer />
+      <Routes>
+        <Route path="/birthday" element={<Birthday />} />
+        <Route path="/birthday/index.html" element={<Birthday />} />
+        <Route path="*" element={<LoveStoryApp />} />
+      </Routes>
+    </>
   );
 }

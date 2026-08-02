@@ -48,7 +48,8 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = () => {
   const fallbackAudioRef = useRef<HTMLAudioElement | null>(null);
   const fallbackActivatedRef = useRef(false);
   const isReadyRef = useRef(false);
-  const [hasInteracted, setHasInteracted] = useState(false);
+  const hasInteractedRef = useRef(false);
+  const [, setHasInteracted] = useState(false);
 
   const activateFallbackAudio = (source: string) => {
     if (fallbackActivatedRef.current) return;
@@ -57,7 +58,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = () => {
     const audio = new Audio(source);
     audio.loop = true;
     audio.preload = 'auto';
-    audio.muted = !hasInteracted;
+    audio.muted = !hasInteractedRef.current;
     audio.volume = 0.18;
 
     const tryPlay = () => {
@@ -124,7 +125,12 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = () => {
           onReady: (event: any) => {
             if (!mounted) return;
             isReadyRef.current = true;
-            event.target.mute();
+            if (hasInteractedRef.current) {
+              event.target.unMute();
+              event.target.setVolume(34);
+            } else {
+              event.target.mute();
+            }
             event.target.playVideo();
             intervalId = window.setInterval(ensurePlaying, 2000);
           },
@@ -174,7 +180,8 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = () => {
 
   useEffect(() => {
     const onFirstInteraction = () => {
-      if (hasInteracted) return;
+      if (hasInteractedRef.current) return;
+      hasInteractedRef.current = true;
       setHasInteracted(true);
 
       const player = playerRef.current;
@@ -198,7 +205,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = () => {
       window.removeEventListener('pointerdown', onFirstInteraction, true);
       window.removeEventListener('touchstart', onFirstInteraction, true);
     };
-  }, [hasInteracted]);
+  }, []);
 
   return (
     <div className="fixed bottom-5 right-5 z-50 flex items-center gap-2">
