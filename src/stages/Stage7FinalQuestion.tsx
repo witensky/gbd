@@ -9,6 +9,24 @@ interface Stage7FinalQuestionProps {
   config: LoveStoryConfig;
 }
 
+const submitNetlifyWish = async (answer: {
+  answerText: string;
+  recipientName: string;
+  senderName: string;
+  submittedAt: string;
+}) => {
+  const body = new URLSearchParams({
+    'form-name': 'birthday-wishes',
+    ...answer
+  });
+
+  await fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: body.toString()
+  });
+};
+
 export const Stage7FinalQuestion: React.FC<Stage7FinalQuestionProps> = ({
   config
 }) => {
@@ -53,7 +71,19 @@ export const Stage7FinalQuestion: React.FC<Stage7FinalQuestionProps> = ({
       console.error("Local storage error:", err);
     }
 
-    // 2. Server API persistence
+    // 2. Netlify Forms persistence for production deploys
+    try {
+      await submitNetlifyWish({
+        answerText: newAnswerObj.answerText,
+        recipientName: newAnswerObj.recipientName,
+        senderName: newAnswerObj.senderName,
+        submittedAt: newAnswerObj.submittedAt
+      });
+    } catch (err) {
+      console.error("Netlify form post error:", err);
+    }
+
+    // 3. Local server API persistence for npm run dev
     try {
       await fetch('/api/answers', {
         method: 'POST',
