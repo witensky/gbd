@@ -30,10 +30,10 @@
   --ease-out:  cubic-bezier(.2,.7,.2,1);
 }
 
-*{ box-sizing:border-box; margin:0; padding:0; }
-html, body{ height:100%; }
+*{ box-sizing:border-box; }
+html, body{ min-height:100%; }
 
-body{
+body.birthday-active{
   background:#12060c;                 /* seam colour under everything */
   overflow:hidden;
   -webkit-font-smoothing:antialiased;
@@ -41,6 +41,7 @@ body{
   cursor:auto;
 }
 
+.birthday-page{ min-height:100vh; }
 .scene{ position:fixed; inset:0; overflow:hidden; }
 
 .sr-only{
@@ -450,7 +451,7 @@ body{
 }
 .grade__grain{
   position:absolute; inset:0;
-  background:url('/textures/grain.png') repeat;
+  background:url('./assets/grain.png') repeat;
   background-size:300px; opacity:.05; mix-blend-mode:overlay;
 }
 

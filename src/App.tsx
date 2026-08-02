@@ -1,5 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Birthday from './birthday/Birthday';
 import { getLoveStoryConfig } from './data/loveStory';
 import { LoveStoryConfig, StageId, StageInfo } from './types';
 
@@ -16,7 +18,7 @@ import { Stage5Letter } from './stages/Stage5Letter';
 import { Stage6FakeEnding } from './stages/Stage6FakeEnding';
 import { Stage7FinalQuestion } from './stages/Stage7FinalQuestion';
 
-export default function App() {
+function LoveStoryApp() {
   const [config] = useState<LoveStoryConfig>(getLoveStoryConfig());
   const [currentStageId, setCurrentStageId] = useState<StageId>('intro');
   const [unlockedStageIds, setUnlockedStageIds] = useState<StageId[]>(['intro']);
@@ -179,5 +181,15 @@ export default function App() {
       </main>
 
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/birthday" element={<Birthday />} />
+      <Route path="/birthday/index.html" element={<Birthday />} />
+      <Route path="*" element={<LoveStoryApp />} />
+    </Routes>
   );
 }

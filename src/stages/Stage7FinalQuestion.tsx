@@ -1,7 +1,8 @@
 import confetti from 'canvas-confetti';
 import { CheckCircle2, Heart, Lock, Send } from 'lucide-react';
 import { motion } from 'motion/react';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { LoveStoryConfig } from '../types';
 
 interface Stage7FinalQuestionProps {
@@ -11,6 +12,7 @@ interface Stage7FinalQuestionProps {
 export const Stage7FinalQuestion: React.FC<Stage7FinalQuestionProps> = ({
   config
 }) => {
+  const navigate = useNavigate();
   const [answerText, setAnswerText] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -20,7 +22,7 @@ export const Stage7FinalQuestion: React.FC<Stage7FinalQuestionProps> = ({
     "En ce jour spécial, dis-moi une chose que tu désires et moi je l'exauce ✨";
 
   const redirectToBirthday = () => {
-    window.location.replace('/birthday/index.html');
+    navigate('/birthday', { replace: true });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -78,16 +80,10 @@ export const Stage7FinalQuestion: React.FC<Stage7FinalQuestionProps> = ({
         colors: ['#f472b6', '#fbbf24', '#e11d48', '#ffffff']
       });
     } catch {}
+
+    // Redirect immediately after the message is sent
+    redirectToBirthday();
   };
-
-  useEffect(() => {
-    if (!isSubmitted) return;
-    const timeout = window.setTimeout(() => {
-      redirectToBirthday();
-    }, 2400);
-
-    return () => window.clearTimeout(timeout);
-  }, [isSubmitted]);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center relative px-4 py-20 z-10 text-center">

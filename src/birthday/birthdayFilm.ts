@@ -19,7 +19,10 @@
    plays once, then holds — living, never looping.
    ============================================================ */
 
+// @ts-nocheck
 import gsap from 'gsap';
+
+export function initBirthdayFilm(root = document) {
 
 /* the pen-stroke plugin: a `drawn` 0..1 property for the underline */
 gsap.registerPlugin({
@@ -34,7 +37,7 @@ gsap.registerPlugin({
   },
 });
 
-const $ = (id) => document.getElementById(id);
+const $ = (id) => root.querySelector(`#${id}`);
 
 const canvas = $('tree');
 const ctx    = canvas.getContext('2d');
@@ -909,7 +912,8 @@ function resize(){
   }
 }
 let resizeRAF = 0;
-window.addEventListener('resize', () => { if (resizeRAF) return; resizeRAF = requestAnimationFrame(() => { resizeRAF = 0; resize(); }); });
+function onResize(){ if (resizeRAF) return; resizeRAF = requestAnimationFrame(() => { resizeRAF = 0; resize(); }); }
+window.addEventListener('resize', onResize);
 
 resize();
 
@@ -930,4 +934,15 @@ if (isRecord){
     start(){ autoFire(); },
     replay(){ resetAll(); },
   };
+}
+
+return () => {
+  window.removeEventListener('resize', onResize);
+  replay.removeEventListener('click', resetAll);
+  treeStop();
+  if (filmTL) filmTL.kill();
+  if (beatTL) beatTL.kill();
+  gsap.killTweensOf(root.querySelectorAll('*'));
+  if (window.bdayAPI) delete window.bdayAPI;
+};
 }

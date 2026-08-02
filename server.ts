@@ -10,6 +10,10 @@ async function startServer() {
 
   app.use(express.json({ limit: "10mb" }));
 
+  app.get("/birthday/index.html", (_req, res) => {
+    res.redirect(302, "/birthday");
+  });
+
   // File to persist recipient answers
   const dataDir = path.join(process.cwd(), "data");
   const answersFilePath = path.join(dataDir, "answers.json");
